@@ -5,12 +5,15 @@ const input = getInputs(1)
   .filter((r) => r)
   .map(Number);
 
-function getDepthIncreases(parsedInputs) {
+function getDepthIncreasesSlidingWindow(parsedInputs, windowSize = 3) {
   let lastDepth;
   let count = 0;
 
-  for (let i = 0; i < parsedInputs.length; i++) {
-    const value = parsedInputs[i];
+  const maxWindows = parsedInputs.length - windowSize + 1;
+  for (let i = 0; i < maxWindows; i++) {
+    const values = parsedInputs.slice(i, i + windowSize);
+    const value = values.reduce((acc, v) => acc + v, 0);
+    console.log("getDepthIncreasesSlidingWindow ~ value", value);
 
     if (lastDepth) {
       if (value > lastDepth) {
@@ -23,16 +26,25 @@ function getDepthIncreases(parsedInputs) {
   return count;
 }
 
+function getDepthIncreases(parsedInputs) {
+  return getDepthIncreasesSlidingWindow(parsedInputs, 1);
+}
+
 function a() {
   const depthIncreases = getDepthIncreases(input);
 
   console.log("a", depthIncreases);
 }
-function b() {}
-a();
+function b() {
+  const depthIncreases = getDepthIncreasesSlidingWindow(input);
+
+  console.log("b", depthIncreases);
+}
+// b();
 
 module.exports = {
   a,
   b,
   getDepthIncreases,
+  getDepthIncreasesSlidingWindow,
 };
