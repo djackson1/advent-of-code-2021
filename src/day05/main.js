@@ -8,8 +8,8 @@ function getPuzzleInput(isTestInput = false) {
     .filter((r) => r)
     .map((row) => {
       const [l, r] = row.split("->");
-      const [lx, ly] = l.split(",").map(Number);
-      const [rx, ry] = r.split(",").map(Number);
+      const [ly, lx] = l.split(",").map(Number);
+      const [ry, rx] = r.split(",").map(Number);
       return { lx, ly, rx, ry };
     });
 }
@@ -22,39 +22,63 @@ function removeDiagonals(input) {
     if (ly === ry) return true;
     return false;
   });
-  // .map((r) => {
-  //   const { lx, rx } = r;
-  //   if (lx === rx) {
-  //     return { ...r, type: "HORIZONTAL" };
-  //   } else {
-  //     return { ...r, type: "VERTICAL" };
-  //   }
-  // });
 }
 
 function createOceanFloorVentMap(input) {
   const floorMap = {};
 
-  input.forEach(({ lx, ly, rx, ry }, i) => {
-    const isHorizontal = ly === ry;
+  input.forEach(({ lx, ly, rx, ry }) => {
+    const dx = lx !== rx ? (rx > lx ? 1 : -1) : 0;
+    const dy = ly !== ry ? (ry > ly ? 1 : -1) : 0;
 
-    const dx = isHorizontal ? (rx > lx ? 1 : -1) : 0;
-    const dy = !isHorizontal ? (ry > ly ? 1 : -1) : 0;
+    // diagonal
+    if (dx !== 0 && dy !== 0) {
+      let x = lx;
+      let y = ly;
 
-    for (let x = lx; x !== rx + dx; x += dx) {
-      const key = `${x}-${ly}`;
-      if (!floorMap[key]) floorMap[key] = 0;
-      floorMap[key]++;
-    }
+      while (true) {
+        if (x === rx + dx && y === ry + dy) break;
 
-    for (let y = ly; y !== ry + dy; y += dy) {
-      const key = `${lx}-${y}`;
-      if (!floorMap[key]) floorMap[key] = 0;
-      floorMap[key]++;
+        const key = `${x}-${y}`;
+        if (!floorMap[key]) floorMap[key] = 0;
+        floorMap[key]++;
+
+        x += dx;
+        y += dy;
+      }
+      // horizontal or vertical
+    } else {
+      for (let x = lx; x !== rx + dx; x += dx) {
+        const key = `${x}-${ly}`;
+        if (!floorMap[key]) floorMap[key] = 0;
+        floorMap[key]++;
+      }
+
+      for (let y = ly; y !== ry + dy; y += dy) {
+        const key = `${lx}-${y}`;
+        if (!floorMap[key]) floorMap[key] = 0;
+        floorMap[key]++;
+      }
     }
   });
 
   return floorMap;
+}
+
+function print(map) {
+  for (let x = 0; x < 10; x++) {
+    let str = "";
+    for (let y = 0; y < 10; y++) {
+      const key = `${x}-${y}`;
+
+      if (map[key]) {
+        str += map[key];
+      } else {
+        str += ".";
+      }
+    }
+    console.log(str);
+  }
 }
 
 function a() {
@@ -66,7 +90,11 @@ function a() {
   console.log("a", tilesTwoPlus.length);
 }
 function b() {
-  console.log("b", input);
+  const floorMap = createOceanFloorVentMap(puzzleInput);
+  const ventCount = Object.values(floorMap);
+  const tilesTwoPlus = ventCount.filter((r) => r >= 2);
+
+  console.log("b", tilesTwoPlus.length);
 }
 
 module.exports = {
@@ -75,4 +103,5 @@ module.exports = {
   getPuzzleInput,
   removeDiagonals,
   createOceanFloorVentMap,
+  print,
 };
