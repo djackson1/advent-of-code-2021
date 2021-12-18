@@ -42,11 +42,12 @@ function findShortestAmountOfFuelLinear(inputs) {
 }
 
 function a() {
-  const fuel = findShortestAmountOfFuel(input);
+  const fuel = findShortestAmountOfFuelLinear(input);
   console.log("a", fuel);
 }
 function b() {
-  console.log("b", input);
+  const fuel = findShortestAmountOfFuelWithAcceleration(input);
+  console.log("b", fuel);
 }
 
 module.exports = {
