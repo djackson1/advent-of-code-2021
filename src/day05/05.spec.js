@@ -12,11 +12,12 @@ const partAInput = removeDiagonals(testInput);
 const floorMapPartA = createOceanFloorVentMap(partAInput);
 const floorMapPartB = createOceanFloorVentMap(testInput);
 
-print(floorMapPartA);
-console.log();
-print(floorMapPartB);
-
 describe("day 05", function () {
+  before(function () {
+    print(floorMapPartA);
+    console.log();
+    print(floorMapPartB);
+  });
   describe("part a", function () {
     it("should find 5 vents with overlapping coords", function () {
       const ventCount = Object.values(floorMapPartA);
