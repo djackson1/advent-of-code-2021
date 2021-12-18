@@ -66,9 +66,14 @@ function createOceanFloorVentMap(input) {
 }
 
 function print(map) {
-  for (let x = 0; x < 10; x++) {
+  const values = Object.keys(map).map((str) => str.split("-").map(Number));
+
+  const maxX = values.reduce((acc, [x]) => (x > acc ? x : acc), 0);
+  const maxY = values.reduce((acc, [_, y]) => (y > acc ? y : acc), 0);
+
+  for (let x = 0; x <= maxX; x++) {
     let str = "";
-    for (let y = 0; y < 10; y++) {
+    for (let y = 0; y <= maxY; y++) {
       const key = `${x}-${y}`;
 
       if (map[key]) {
