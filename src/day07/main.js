@@ -7,14 +7,23 @@ function getPuzzleInput(isTestInput = false) {
 }
 const input = getPuzzleInput();
 
-function findShortestAmountOfFuel(inputs) {
+function triangleNumbersFn(a, b) {
+  const distance = Math.abs(a - b);
+  return (distance * (distance + 1)) / 2;
+}
+
+function linearFn(a, b) {
+  return Math.abs(a - b);
+}
+
+function findShortestAmountOfFuel(inputs, distanceFunction) {
   const max = inputs.reduce((acc, v) => (v > acc ? v : acc), 0);
 
   const values = [...new Array(max + 1)].map((_, i) => i);
 
   const fuelCounts = values.map((position) => {
     return inputs.reduce((acc, crabPosition) => {
-      const distance = Math.abs(position - crabPosition);
+      const distance = distanceFunction(position, crabPosition);
       return acc + distance;
     }, 0);
   });
@@ -22,6 +31,14 @@ function findShortestAmountOfFuel(inputs) {
   const shortestFuel = fuelCounts.sort((a, b) => a - b)[0];
 
   return shortestFuel;
+}
+
+function findShortestAmountOfFuelWithAcceleration(inputs) {
+  return findShortestAmountOfFuel(inputs, triangleNumbersFn);
+}
+
+function findShortestAmountOfFuelLinear(inputs) {
+  return findShortestAmountOfFuel(inputs, linearFn);
 }
 
 function a() {
@@ -36,5 +53,6 @@ module.exports = {
   a,
   b,
   getPuzzleInput,
-  findShortestAmountOfFuel,
+  findShortestAmountOfFuelLinear,
+  findShortestAmountOfFuelWithAcceleration,
 };
