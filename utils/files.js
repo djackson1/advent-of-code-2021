@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 function getDayString(day) {
+  if (day === 0 || day === "00") return "00";
   if (day < 10) return `0${day}`;
   return `${day}`;
 }
@@ -21,7 +22,14 @@ function getTestInput(day) {
   return getInputs(day, true);
 }
 
+function getCurrentDay(dirname) {
+  const split = dirname.split("/");
+  const day = split[split.length - 1].replace(/day/, "");
+  return Number(day);
+}
+
 module.exports = {
+  getCurrentDay,
   getInputs,
   getTestInput,
 };
