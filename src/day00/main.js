@@ -1,6 +1,6 @@
-const { getInputs } = require("../../utils/files");
+const { getInputs, getCurrentDay } = require("../../utils/files");
 
-const DAY = 0;
+const DAY = getCurrentDay(__dirname);
 
 function getPuzzleInput(isTestInput = false) {
   return getInputs(DAY, isTestInput)
