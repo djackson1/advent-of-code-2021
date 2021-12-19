@@ -5,7 +5,7 @@ const DAY = 0;
 function getPuzzleInput(isTestInput = false) {
   return getInputs(DAY, isTestInput)
     .split("\n")
-    .filter((r) => r)
+    .filter((row) => row)
     .map(Number);
 }
 const input = getPuzzleInput();
