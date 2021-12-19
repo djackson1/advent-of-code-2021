@@ -7,6 +7,9 @@ function getDayString(day) {
 }
 
 function getInputs(day, isTestInput = false) {
+  // if (day === 0) {
+  //   throw new Error("You need to change the value of DAY in main.js!");
+  // }
   const filename = isTestInput ? "input.spec.txt" : "input.txt";
   const dayStr = getDayString(day);
   const dayDir = path.resolve(__dirname, `../src/day${dayStr}`, filename);
