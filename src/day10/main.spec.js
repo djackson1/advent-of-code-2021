@@ -41,5 +41,30 @@ describe(`day ${getCurrentDay(__dirname)}`, function () {
     });
   });
 
-  describe("part b", function () {});
+  describe("part b", function () {
+    it("should get the incomplete lines", function () {
+      const closingValues = {
+        ")": 1,
+        "]": 2,
+        "}": 3,
+        ">": 4,
+      };
+      const incompleteRows = testInput
+        .map(getSyntaxError)
+        .filter((value) => Array.isArray(value));
+
+      const incompleteChunkValues = incompleteRows
+        .map((values) => {
+          return values.reduce((acc, value) => {
+            return acc * 5 + closingValues[value];
+          }, 0);
+        })
+        .sort((a, b) => a - b);
+
+      const middleIncompleteValue =
+        incompleteChunkValues[(incompleteChunkValues.length - 1) / 2];
+
+      expect(middleIncompleteValue).to.equal(288957);
+    });
+  });
 });
