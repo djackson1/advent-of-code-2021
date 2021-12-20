@@ -9,16 +9,16 @@ const {
 
 const testInput = getPuzzleInput(true);
 
-describe("day 08", function () {
-  describe("part a", function () {
-    it("should count the total digits with unique wire counts", function () {
+describe("day 08", () => {
+  describe("part a", () => {
+    it("should count the total digits with unique wire counts", () => {
       const countOfDigits = countDigits1478(testInput);
       expect(countOfDigits).to.equal(26);
     });
   });
 
-  describe("part b", function () {
-    it("should create the correct wire map for the test example", function () {
+  describe("part b", () => {
+    it("should create the correct wire map for the test example", () => {
       const { wireMap } = createWireMap(testInput[0].wires);
 
       expect(wireMap).to.deep.equal({
@@ -32,7 +32,7 @@ describe("day 08", function () {
       });
     });
 
-    it("should get the correct final number from the test example", function () {
+    it("should get the correct final number from the test example", () => {
       const { wireMapLookup } = createWireMap(testInput[0].wires);
 
       const number = getNumberFromWires(testInput[0].digits, wireMapLookup);
@@ -40,7 +40,7 @@ describe("day 08", function () {
       expect(number).to.equal(5353);
     });
 
-    it("should add up all the test numbers correctly", function () {
+    it("should add up all the test numbers correctly", () => {
       // added the website test to the first row...
       const inputs = testInput.slice(1);
 

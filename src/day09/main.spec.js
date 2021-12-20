@@ -10,9 +10,9 @@ const {
 const day = getCurrentDay(__dirname);
 const testInput = getPuzzleInput(true);
 
-describe(`day ${day}`, function () {
-  describe("part a", function () {
-    it("should find the low points", function () {
+describe(`day ${day}`, () => {
+  describe("part a", () => {
+    it("should find the low points", () => {
       const lowPoints = findLowPoints(testInput);
       const lowPointValues = lowPoints.map(({ value }) => value);
       expect(lowPointValues).to.deep.equal([1, 5, 5, 0]);
@@ -22,8 +22,8 @@ describe(`day ${day}`, function () {
     });
   });
 
-  describe("part b", function () {
-    it("should flood fill the map into an array of basins", function () {
+  describe("part b", () => {
+    it("should flood fill the map into an array of basins", () => {
       const basins = findBasins(testInput);
 
       const biggestThreeBasins = basins.slice(0, 3);

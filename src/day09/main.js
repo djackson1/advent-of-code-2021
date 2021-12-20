@@ -17,9 +17,7 @@ function getHeightAtPosition(x, y, map) {
   return [map[key]];
 }
 
-const getRiskLevel = (lowPoints) => {
-  return lowPoints.reduce((acc, v) => acc + v + 1, 0);
-};
+const getRiskLevel = (lowPoints) => lowPoints.reduce((acc, v) => acc + v + 1, 0);
 
 function getAdjacentHeights(x, y, map) {
   const values = [

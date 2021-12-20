@@ -10,14 +10,18 @@ function getPuzzleInput(isTestInput = false) {
       const [l, r] = row.split("->");
       const [ly, lx] = l.split(",").map(Number);
       const [ry, rx] = r.split(",").map(Number);
-      return { lx, ly, rx, ry };
+      return {
+        lx, ly, rx, ry
+      };
     });
 }
 
 const puzzleInput = getPuzzleInput();
 
 function removeDiagonals(input) {
-  return input.filter(({ lx, ly, rx, ry }) => {
+  return input.filter(({
+    lx, ly, rx, ry
+  }) => {
     if (lx === rx) return true;
     if (ly === ry) return true;
     return false;
@@ -27,7 +31,9 @@ function removeDiagonals(input) {
 function createOceanFloorVentMap(input) {
   const floorMap = {};
 
-  input.forEach(({ lx, ly, rx, ry }) => {
+  input.forEach(({
+    lx, ly, rx, ry
+  }) => {
     const dx = lx !== rx ? (rx > lx ? 1 : -1) : 0;
     const dy = ly !== ry ? (ry > ly ? 1 : -1) : 0;
 

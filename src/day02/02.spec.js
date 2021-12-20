@@ -11,16 +11,16 @@ const parsedInputs = testInput
     return { dir, value: Number(value) };
   });
 
-describe("day 02", function () {
-  describe("part a", function () {
-    it("should calculate the correct position", function () {
+describe("day 02", () => {
+  describe("part a", () => {
+    it("should calculate the correct position", () => {
       const position = getPosition(parsedInputs);
 
       expect(position.y * position.x).to.equal(150);
     });
   });
-  describe("part b", function () {
-    it("should calculate the correct position", function () {
+  describe("part b", () => {
+    it("should calculate the correct position", () => {
       const position = getPositionB(parsedInputs);
 
       expect(position.y * position.x).to.equal(900);

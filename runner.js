@@ -10,4 +10,4 @@ const { argv } = require("yargs");
     console.log(`Running day ${day}`);
     daySolutions[part]();
   }
-})();
+}());

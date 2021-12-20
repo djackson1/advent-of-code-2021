@@ -7,16 +7,16 @@ const {
 
 const testInput = getPuzzleInput(true);
 
-describe("day 07", function () {
-  describe("part a", function () {
-    it("should find the shortest amount of fuel needed", function () {
+describe("day 07", () => {
+  describe("part a", () => {
+    it("should find the shortest amount of fuel needed", () => {
       const fuel = findShortestAmountOfFuelLinear(testInput);
       expect(fuel).to.equal(37);
     });
   });
 
-  describe("part b", function () {
-    it("should find the shortest amount of fuel needed", function () {
+  describe("part b", () => {
+    it("should find the shortest amount of fuel needed", () => {
       const fuel = findShortestAmountOfFuelWithAcceleration(testInput);
       expect(fuel).to.equal(168);
     });

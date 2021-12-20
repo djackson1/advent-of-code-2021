@@ -21,12 +21,10 @@ function findShortestAmountOfFuel(inputs, distanceFunction) {
 
   const values = [...new Array(max + 1)].map((_, i) => i);
 
-  const fuelCounts = values.map((position) => {
-    return inputs.reduce((acc, crabPosition) => {
-      const distance = distanceFunction(position, crabPosition);
-      return acc + distance;
-    }, 0);
-  });
+  const fuelCounts = values.map((position) => inputs.reduce((acc, crabPosition) => {
+    const distance = distanceFunction(position, crabPosition);
+    return acc + distance;
+  }, 0));
 
   const shortestFuel = fuelCounts.sort((a, b) => a - b)[0];
 

@@ -8,7 +8,7 @@ const {
 
 const testInput = getPuzzleInput(true);
 
-describe(`day ${getCurrentDay(__dirname)}`, function () {
+describe(`day ${getCurrentDay(__dirname)}`, () => {
   const validChunks = [
     "()",
     "[]",
@@ -21,28 +21,28 @@ describe(`day ${getCurrentDay(__dirname)}`, function () {
 
   const corruptedChunks = ["(]", "{()()()>", "(((()))}", "<([]){()}[{}])"];
 
-  describe("part a", function () {
-    it("should validate validate chunks", function () {
+  describe("part a", () => {
+    it("should validate validate chunks", () => {
       validChunks.forEach((chunk) => {
         expect(getSyntaxError(chunk)).to.be.null;
       });
     });
 
-    it("should invalidate corrupted chunks", function () {
+    it("should invalidate corrupted chunks", () => {
       corruptedChunks.forEach((chunk) => {
         expect(getSyntaxError(chunk)).to.not.be.null;
       });
     });
 
-    it("should calculate the correct syntax error score for the test input", function () {
+    it("should calculate the correct syntax error score for the test input", () => {
       const syntaxErrorScore = getSyntaxErrorScore(testInput);
 
       expect(syntaxErrorScore).to.equal(26397);
     });
   });
 
-  describe("part b", function () {
-    it("should get the incomplete lines", function () {
+  describe("part b", () => {
+    it("should get the incomplete lines", () => {
       const closingValues = {
         ")": 1,
         "]": 2,
@@ -54,11 +54,9 @@ describe(`day ${getCurrentDay(__dirname)}`, function () {
         .filter((value) => Array.isArray(value));
 
       const incompleteChunkValues = incompleteRows
-        .map((values) => {
-          return values.reduce((acc, value) => {
-            return acc * 5 + closingValues[value];
-          }, 0);
-        })
+        .map((values) =>
+          values.reduce((acc, value) => acc * 5 + closingValues[value], 0)
+        )
         .sort((a, b) => a - b);
 
       const middleIncompleteValue =
