@@ -7,10 +7,8 @@ function getPuzzleInput(isTestInput = false) {
     .split("\n")
     .filter((row) => row);
 }
-const input = getPuzzleInput();
-
+const puzzleInput = getPuzzleInput();
 const openers = ["(", "[", "{", "<"];
-const closers = [")", "]", "}", ">"];
 const matchingCloser = {
   "(": ")",
   "[": "]",
@@ -30,11 +28,15 @@ function getSyntaxError(chunk) {
     } else {
       const lastItem = stack.pop();
 
-      if (matchingCloser[lastItem] !== c) return c;
+      if (matchingCloser[lastItem] !== c) {
+        return c;
+      }
     }
   }
 
-  if (stack.length === 0) return null;
+  if (stack.length === 0) {
+    return null;
+  }
 
   stack.reverse();
 
@@ -45,9 +47,13 @@ function getSyntaxErrorScore(input) {
   const syntaxErrorCounts = input.reduce((acc, chunk) => {
     const syntaxError = getSyntaxError(chunk);
 
-    if (!syntaxError) return acc;
+    if (!syntaxError) {
+      return acc;
+    }
 
-    if (!acc[syntaxError]) acc[syntaxError] = 0;
+    if (!acc[syntaxError]) {
+      acc[syntaxError] = 0;
+    }
     acc[syntaxError]++;
 
     return acc;
@@ -62,7 +68,7 @@ function getSyntaxErrorScore(input) {
 }
 
 function a() {
-  const syntaxErrorScore = getSyntaxErrorScore(input);
+  const syntaxErrorScore = getSyntaxErrorScore(puzzleInput);
   console.log("a", syntaxErrorScore);
 }
 function b() {
@@ -72,18 +78,14 @@ function b() {
     "}": 3,
     ">": 4,
   };
-  const incompleteRows = input
+  const incompleteRows = puzzleInput
     .map(getSyntaxError)
     .filter((value) => Array.isArray(value));
-
   const incompleteChunkValues = incompleteRows
-    .map((values) => {
-      return values.reduce((acc, value) => {
-        return acc * 5 + closingValues[value];
-      }, 0);
-    })
-    .sort((a, b) => a - b);
-
+    .map((values) =>
+      values.reduce((acc, value) => acc * 5 + closingValues[value], 0)
+    )
+    .sort((v1, v2) => v1 - v2);
   const middleIncompleteValue =
     incompleteChunkValues[(incompleteChunkValues.length - 1) / 2];
 

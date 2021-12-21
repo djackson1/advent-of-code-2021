@@ -105,8 +105,8 @@ function getNumberFromWires(wireGroups, wireMapLookup) {
 }
 
 function swap(json) {
-  var ret = {};
-  for (var key in json) {
+  const ret = {};
+  for (const key in json) {
     ret[json[key]] = key;
   }
   return ret;
@@ -213,7 +213,9 @@ function createWireMap(wires) {
 }
 
 function printWireMap(wireMap) {
-  const { a, b, c, d, e, f, g } = wireMap;
+  const {
+    a, b, c, d, e, f, g
+  } = wireMap;
   console.log(` ${a}${a}${a}${a} `);
   console.log(`${b}    ${c}`);
   console.log(`${b}    ${c}`);

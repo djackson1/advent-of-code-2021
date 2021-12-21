@@ -8,13 +8,13 @@ function getPuzzleInput(isTestInput = false) {
     .filter((row) => row)
     .map(Number);
 }
-const input = getPuzzleInput();
+const puzzleInput = getPuzzleInput();
 
 function a() {
-  console.log("a", input);
+  console.log("a", puzzleInput);
 }
 function b() {
-  console.log("b", input);
+  console.log("b", puzzleInput);
 }
 
 module.exports = {
